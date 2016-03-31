@@ -4,14 +4,14 @@
 Preprocessing after preprocessing input:
     [x] Normalize the X and Y with definition2.
     [x] Use the current cut c to cut both X and Y into smaller pieces. E.g. for N(X), I will have N(X) [0:c], N(X)[c:2c], N(X)[2c:3c]… etc. Same thing goes for N(Y).
-    [ ] For each pair of N(X) and N(Y), calculate the Euclidean distance E between each pair with definition 4.
+    [x] For each pair of N(X) and N(Y), calculate the Euclidean distance E between each pair with definition 4.
     [ ] Store the results into E0, E1, E2 ….E2 For later retrieval.
 
 '''
 import sys
 testing = True
 import numpy as np
-def normalize_def2(X):
+def normalize_d2(X):
     '''
     N(x) = (x-x_avg)/sqrt(sum((x-x_avg)^2))
     Args:
@@ -42,17 +42,27 @@ def cut(X,c):
     '''
     c = int(c)
     return [X[c*i:c*(i+1)]for i in xrange(len(X)/c)]
-
-
-
+def euclidean_d4(X,Y):
+    '''
+    Et ̄tˆ(X, Y ) = Dt ̄tˆ(Nt ̄tˆ(X), Nt ̄tˆ(Y ))
+    Definition 4 
+    Args:
+        X, Y: arrays of floats. 
+    Returns: 
+        E from X and Y. 
+    '''
+    N_x = normalize_d2(X)
+    N_y = normalize_d2(Y)
+    return np.linalg.norm(N_x-N_y)
 
 if testing:
     X = [0,2,4,4,0]
     c =  2
     print 'X',X
     print 'c',c
-    N = normalize_def2(X)
+    N = normalize_d2(X)
     print 'normalized',N
     C = cut(N,c)
     print 'cutted',C
-    
+    E = euclidean_d4(X,X) 
+    print 'euclidean',E
