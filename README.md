@@ -10,7 +10,7 @@ We  build the database to pre calculate the input data
 #Procedures: 
 - Preprocessing after preprocessing input: 
     - [X] Normalize the X and Y with definition2. 
-    - [ ] definition2Use the current cut c to cut both X and Y into smaller pieces. E.g. for N(X), I will have N(X) [0:c], N(X)[c:2c], N(X)[2c:3c]… etc. Same thing goes for N(Y). 
+    - [ ] Use the current cut c to cut both X and Y into smaller pieces. E.g. for N(X), I will have N(X) [0:c], N(X)[c:2c], N(X)[2c:3c]… etc. Same thing goes for N(Y). 
     - [ ] For each pair of N(X) and N(Y), calculate the Euclidean distance E between    each pair with definition 4. 
     - [ ] Store the results into E0, E1, E2 ….E2 For later retrieval. 
 - Calculation after query input: 
