@@ -14,7 +14,7 @@ We  build the database to pre calculate the input data
     - [X] For each pair of N(X) and N(Y), calculate the Euclidean distance E between    each pair with definition 4. 
     - [ ] Store the results into E0, E1, E2 ….E2 For later retrieval. 
 - Calculation after query input: 
-    - [ ] The real correlationelation result of X[t1,t2] and Y[t1,t2]
+    - [X] The real correlationelation result of X[t1,t2] and Y[t1,t2]
     - [ ] The estimated result of X[t1,t2] and Y[t1,t2] using the closest cuts. 
 #Thoughts
 1. Should we use different compression methods. C. or should we appy data compression methods instead of having a thousand boxes, should we have 1000 points with a given error. 

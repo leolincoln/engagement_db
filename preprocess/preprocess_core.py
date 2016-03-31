@@ -54,7 +54,8 @@ def euclidean_d4(X,Y):
     N_x = normalize_d2(X)
     N_y = normalize_d2(Y)
     return np.linalg.norm(N_x-N_y)
-
+def store():
+    pass
 if testing:
     X = [0,2,4,4,0]
     c =  2
