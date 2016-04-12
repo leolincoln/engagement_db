@@ -8,10 +8,10 @@ Preprocessing after preprocessing input:
     [ ] Store the results into E0, E1, E2 ….E2 For later retrieval.
 
 '''
-import sys
-testing = True
+import sys,os
+testing = False
 import numpy as np
-def normalize_d2(X):
+def N_(X):
     '''
     N(x) = (x-x_avg)/sqrt(sum((x-x_avg)^2))
     Args:
@@ -42,7 +42,7 @@ def cut(X,c):
     '''
     c = int(c)
     return [X[c*i:c*(i+1)]for i in xrange(len(X)/c)]
-def euclidean_d4(X,Y):
+def E_(X,Y):
     '''
     Et ̄tˆ(X, Y ) = Dt ̄tˆ(Nt ̄tˆ(X), Nt ̄tˆ(Y ))
     Definition 4 
@@ -51,19 +51,36 @@ def euclidean_d4(X,Y):
     Returns: 
         E from X and Y. 
     '''
-    N_x = normalize_d2(X)
-    N_y = normalize_d2(Y)
-    return np.linalg.norm(N_x-N_y)
-def store():
-    pass
+    N_x = N_(X)
+    N_y = N_(Y)
+    return np.linalg.norm(N_x-N_y)**2
+def store(X,Y,c,key,desc):
+    '''
+    Store the euclidean distance of c in files. from X and Y
+    E(X[0:c],Y[0:c]) --- file ../db_store/0_1
+    E(X[c:2c],Y[c:2c]) -- file ../db_store/1_2
+    E(X[2c:3c],[Y[2c:3c]]) -- file ../db_store/2_3
+    '''
+    cutX = cut(X,c)
+    cutY = cut(Y,c)
+    for i in xrange(len(cutX)):
+        file_name = str(i)+'_'+str(c)+'.dt'
+        full_path = get_storage_path()+file_name
+        with open(full_path,'w') as f:
+            f.write(str(E_(cutX[i],cutY[i])))
+    return True 
+def get_storage_path():
+    full_path = os.path.realpath(__file__)
+    dir_name = (os.path.dirname(full_path))
+    return dir_name+'/../db_storage/'
 if testing:
     X = [0,2,4,4,0]
     c =  2
     print 'X',X
     print 'c',c
-    N = normalize_d2(X)
+    N = N_(X)
     print 'normalized',N
     C = cut(N,c)
     print 'cutted',C
-    E = euclidean_d4(X,X) 
+    E = E_(X,X) 
     print 'euclidean',E

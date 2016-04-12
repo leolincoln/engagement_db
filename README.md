@@ -1,4 +1,6 @@
 # engagement_db
+# Run:
+    python main.py
 # Purpose
 We  build the database to pre calculate the input data
 
@@ -12,7 +14,7 @@ We  build the database to pre calculate the input data
     - [X] Normalize the X and Y with definition2. 
     - [X] Use the current cut c to cut both X and Y into smaller pieces. E.g. for N(X), I will have N(X) [0:c], N(X)[c:2c], N(X)[2c:3c]… etc. Same thing goes for N(Y). 
     - [X] For each pair of N(X) and N(Y), calculate the Euclidean distance E between    each pair with definition 4. 
-    - [ ] Store the results into E0, E1, E2 ….E2 For later retrieval. 
+    - [X] Store the results into E0, E1, E2 ….E2 For later retrieval. 
 - Calculation after query input: 
     - [X] The real correlationelation result of X[t1,t2] and Y[t1,t2]
     - [ ] The estimated result of X[t1,t2] and Y[t1,t2] using the closest cuts. 
