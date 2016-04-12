@@ -42,6 +42,7 @@ def cut(X,c):
     '''
     c = int(c)
     return [X[c*i:c*(i+1)]for i in xrange(len(X)/c)]
+
 def E_(X,Y):
     '''
     Et ̄tˆ(X, Y ) = Dt ̄tˆ(Nt ̄tˆ(X), Nt ̄tˆ(Y ))
@@ -54,25 +55,30 @@ def E_(X,Y):
     N_x = N_(X)
     N_y = N_(Y)
     return np.linalg.norm(N_x-N_y)**2
+
 def store(X,Y,c,key,desc):
     '''
     Store the euclidean distance of c in files. from X and Y
-    E(X[0:c],Y[0:c]) --- file ../db_store/0_1
-    E(X[c:2c],Y[c:2c]) -- file ../db_store/1_2
-    E(X[2c:3c],[Y[2c:3c]]) -- file ../db_store/2_3
+    E(X[0:c],Y[0:c]) --- file ../db_store/key/0_1
+    E(X[c:2c],Y[c:2c]) -- file ../db_store/key/1_2
+    E(X[2c:3c],[Y[2c:3c]]) -- file ../db_store/key/2_3
     '''
     cutX = cut(X,c)
     cutY = cut(Y,c)
     for i in xrange(len(cutX)):
         file_name = str(i)+'_'+str(c)+'.dt'
-        full_path = get_storage_path()+file_name
+        full_path = get_storage_path()+key+'/'+file_name
         with open(full_path,'w') as f:
             f.write(str(E_(cutX[i],cutY[i])))
+    with open(get_storage_path()+'/keys/'+key) as f:
+        f.write(desc)
     return True 
+
 def get_storage_path():
     full_path = os.path.realpath(__file__)
     dir_name = (os.path.dirname(full_path))
     return dir_name+'/../db_storage/'
+
 if testing:
     X = [0,2,4,4,0]
     c =  2
