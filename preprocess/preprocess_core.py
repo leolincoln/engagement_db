@@ -56,7 +56,7 @@ def E_(X,Y):
     N_y = N_(Y)
     return np.linalg.norm(N_x-N_y)**2
 
-def store(X,Y,c,key,desc):
+def store(X,Y,c,key,desc,key_path = '/keys/'):
     '''
     Store the euclidean distance of c in files. from X and Y
     E(X[0:c],Y[0:c]) --- file ../db_store/key/0_1
@@ -67,10 +67,13 @@ def store(X,Y,c,key,desc):
     cutY = cut(Y,c)
     for i in xrange(len(cutX)):
         file_name = str(i)+'_'+str(c)+'.dt'
-        full_path = get_storage_path()+key+'/'+file_name
+        dir_path = get_storage_path()+key+'/'
+        full_path = dir_path+file_name
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
         with open(full_path,'w') as f:
             f.write(str(E_(cutX[i],cutY[i])))
-    with open(get_storage_path()+'/keys/'+key) as f:
+    with open(get_storage_path()+key_path+key) as f:
         f.write(desc)
     return True 
 
