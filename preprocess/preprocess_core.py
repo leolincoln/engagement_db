@@ -73,7 +73,7 @@ def store(X,Y,c,key,desc,key_path = '/keys/'):
             os.makedirs(dir_path)
         with open(full_path,'w') as f:
             f.write(str(E_(cutX[i],cutY[i])))
-    with open(get_storage_path()+key_path+key) as f:
+    with open(get_storage_path()+key_path+key,'w') as f:
         f.write(desc)
     return True 
 

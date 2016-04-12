@@ -78,7 +78,4 @@ def main():
     main_menu()
 
 if __name__ == '__main__':
-    try:
-        main()
-    except:
-        sys.exit(1)
+    main()
